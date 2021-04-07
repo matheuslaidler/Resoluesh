@@ -22,6 +22,6 @@ Depois será importante dar permissão para o arquivo poder ser executado como u
 ![permissão2](https://user-images.githubusercontent.com/76860503/113920464-317ebc80-97bb-11eb-84cb-aee1f503b0bf.png)
 
 ### Créditos
-Autor: Matheus Laidler
-Licença MIT
-Feito em Shell Script
+Autor: Matheus Laidler; 
+Licença MIT; 
+Feito em Shell Script; 
