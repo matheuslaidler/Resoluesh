@@ -1,6 +1,5 @@
 # ResolueSH
-
-![resolueshV1](https://user-images.githubusercontent.com/76860503/113920807-a5b96000-97bb-11eb-81a7-0c59ad002591.png)
+![resoluesh](https://user-images.githubusercontent.com/76860503/113923911-80c6ec00-97bf-11eb-8a85-dd821c16f431.png)
 
  Script que altera a resolução da sua tela de acordo com a escolha do usuário, podendo testar diversas resoluções sem problemas, mesmo que não tenha nas opções de seu monitor. Ele funciona mais como uma simulação de resolução, ou seja, após reiniciar a máquina a resolução volta ao padrão. Ele escaneia todas as entradas de video e te permite alterar a resolução dos monitores conectados.
  O objetivo foi criar um script que resolva alguns problemas de resolução de tela presentes em algumas situações, como com algumas aplicações. Um exemplo disso é com o editor de vídeo Davinci Resolve ficando bugado em monitores de resolução menor (com esse script ele ficará em tela cheia normal se por uma resolução mais alta). 
@@ -19,7 +18,20 @@ Versão atual: 1.0
  O script terá uma aba de ajuda, onde mostra como e porque o programa foi feito, como utilizar o script da forma correta e como você pode fazer manualmente tudo o que o script faz, te dando os comandos caso o script não funcione na sua máquina por algum motivo.
  Para utilizar o script é necessário, obviamente, utilizar alguma distribuição Linux (Ainda não testado no WSL2). 
 Depois será importante dar permissão para o arquivo poder ser executado como um script. Basta clicar com o boto direito, ir em permissões e selecionar que esse arquivo pode ser um executável como um programa. Também pode ser feito com o comando 'chmod +x resoluesh.sh' dentro da basta onde ele se encontra, pelo terminal.
+
 ![permissão2](https://user-images.githubusercontent.com/76860503/113920464-317ebc80-97bb-11eb-84cb-aee1f503b0bf.png)
+ 
+ Após isso pode executar o script digitando no terminal > ./Resolue.sh
+ 
+ Irá carregar o logo, o scan e o menu
+
+![scan1](https://user-images.githubusercontent.com/76860503/113923977-976d4300-97bf-11eb-800d-724639f3dc8b.png) 
+
+Após mudar a resolução, ela é reconhecida no scan, se rodar dnv:
+
+![resolueshV1](https://user-images.githubusercontent.com/76860503/113920807-a5b96000-97bb-11eb-81a7-0c59ad002591.png)
+
+
 
 ### Créditos
 Criador: Matheus Laidler 
