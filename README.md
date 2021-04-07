@@ -1,0 +1,2 @@
+# Resoluesh
+Script 4 Linux: Mudar / forçar resolução para seu monitor. Pode ser feita para qualquer resolução, bom para quem precisa uma resolução um pouco maior do que o monitor oferece. Criado inicialmente para resolver o problema do Davinci Resolve, o qual aparecia a tela cortada pra direita pois requeria uma resolução maior. Nesse script a resolução maior é criada e feita de forma rápida, tranquila, fácil e sem bugs. 
