@@ -23,5 +23,5 @@ Depois será importante dar permissão para o arquivo poder ser executado como u
 
 ### Créditos
 Autor: Matheus Laidler; 
+
 Licença MIT; 
-Feito em Shell Script; 
