@@ -137,8 +137,9 @@ Página de ajuda finalizada!!
         ;;
        "Listagem")
           echo "
+          ---------------------------------------------------------
           Listagem de telas e entradas conectadas e as sem conexão:
-          "
+          ---------------------------------------------------------"
           xrandr | cut -d " " -f 1,2 | grep 'connected'
          #xrandr | cut -d " " -f 1,2 
             echo "
@@ -148,7 +149,10 @@ Listagem concluía com sucesso!!
           "
           ;;
        "Monitor Primário")
-            echo " Relembrando as informações gerais do seu monitor atual "
+            echo " 
+            ------------------------------------------------------
+            Relembrando as informações gerais do seu monitor atual
+            ------------------------------------------------------ "
             echo "  
 Output:"
             xrandr | grep 'connected primary' | cut -d " " -f 1 
@@ -217,7 +221,10 @@ Processo concluído com sucesso!!
           "
           ;;
         "Outra Resolução")
-            echo "Digite a resolução desejada:"
+            echo "
+            -----------------------------
+            Digite a resolução desejada:
+            -----------------------------"
             read resolucao
           if [[ $resolucao == "" ]];
           then 
@@ -232,9 +239,12 @@ Processo concluído com sucesso!!
           "
           ;;
         	"Personalizada")
-	          echo "Opção personalizada
+	          echo "
+ ------------------------------------------------------------------------------------------------------
+  Opção personalizada
  Escolha o monitor colocando seu output (exemplo: VGA-0) e a resolução específica (exemplo: 1920x1080)
-  - Se precisar de ajuda, usar a opção Help ou a página do github
+ - Se precisar de ajuda, usar a opção Help ou a página do github
+ ------------------------------------------------------------------------------------------------------
 "
 	  echo "Digite o output do monitor desejado
     -Letra maiúscula; caractere especial (-) e numeração (exemplo: HDMI-0)"
@@ -259,8 +269,10 @@ Processo concluído com sucesso!!
           "
          ;;
         "Informações")
-          echo "Mais informações do(s) monitor(es) e as conexões
-          "
+          echo "
+          ------------------------------------------------
+          Mais informações do(s) monitor(es) e as conexões
+          ------------------------------------------------"
         xdpyinfo | grep "default screen" | cut -d " " -f 4 && xdpyinfo | grep "screen" && xdpyinfo | grep "dimensions" | cut -d " " -f 3,7
         echo
         xrandr --verbose | grep "x"
@@ -275,9 +287,9 @@ Processo concluído com sucesso!!
 Obrigado pela preferência!! "
           sleep 0.5s
           echo "
-          
+        ----------------------------------  
         Crédios: Matheus Laidler (Criador)
-          
+        ----------------------------------  
           "
           sleep 0.5s
           echo "
