@@ -10,6 +10,7 @@
  
 ### Informaçes adicionais; 
 Versão atual: 2.0
+
   Notas de atualização:
   - Nova funcionalidade: Foi adicionado ao menu a opção (personalizada) - agora pode escolher em qual monitor quer mudar a resolução, sem ser obrigado a alterar em todos eles (Antes so tinha a opço de personalizar uma resolução específica, mas continuava indo em todos os monitores - o que é sem problemas pra quem tem apenas um - agora temos a opção para selecionar um monitor específico com uma resolução específica também)
   - Agora aparece uma mensagem caso não escreva as opções personalizadas em (12) e (13) do menu, encerrando a atividade do script;
