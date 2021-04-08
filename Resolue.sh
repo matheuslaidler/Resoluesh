@@ -64,12 +64,12 @@ select menu in "${lista[@]}"
   Nele podemos colocar resolução que nem é mostrada nas opções do monitor 
   por padrão.
   Algumas aplicações podem ficar bugados em monitores de resoluções mais baixas
-  Como com o davinci resolve o problema pode ser resolvido botando resolução fullHD. 
-    No meu funcionou com a resolução 1440x830 ficando melhor pra usar 
-    nesse monitor de resolução máxima 1366x768 da Samsumg.
-    Esse bug do D.Resolve é o que fica uma janela (mesmo sendo maximizado) 
-    imóvel e ficando pra parte direita do monitor e assim tendo uma parte 
-    dele sendo comida.
+  podendo resolver o problema botando uma resolução mais alta como fullHD. 
+    No meu Davinci Resolve bugado funcionou com a resolução 1440x830 
+    (melhor pra ver nesse monitor de resolução máxima 1366x768 da Samsumg).
+    -Esse bug é um que fica uma janela (mesmo sendo maximizado) 
+    imóvel e fixado pra parte direita do monitor, assim tendo uma parte 
+    dele cortada sem poder ser utilizada.
   Assim vemos que problemas referentes a resolução podem ter a chance de
   serem resolvidos com este script. Além de ser um script fácil e prático
   de usar para qualquer um que so quer testar resolução mais alta (ou mais baixa).
@@ -88,8 +88,9 @@ select menu in "${lista[@]}"
     Para ter essas informações, selecione a opção de listagem do menu e veja quais
     estão conectados (e onde n tem nada conectado) e seus respectivos outputs.
     Também pode ver o output e a resolução do seu monitor pela opção 'monitor 
-    principal', se tiver apenas um monitor já é o bastante. É a mesma informação
-    que o scan inicial do programa te mostra na tela. 
+    principal', se tiver apenas um monitor já é o bastante. Pode ver todas as
+    informações de outputs e as resoluções na opção 'Informações' do menu.
+    
  *Para a resolução personalizada*
    AVISO: Precisa ser escrita no formato exato a como estão no Menu.
      (Ou seja, usar sem espaços e com o 'x')
@@ -102,6 +103,7 @@ select menu in "${lista[@]}"
   **Caso precise... bote a mão na massa**
   ((saiba como o script foi feito - se quiser pode fazer o processo manualmente))
   
+  Script não funcionando ??
   ~Faça você mesmo:
   <Principalmente em caso de erros> 
   Aprenda agr a testar os comandos que usamos no script de forma manual:
@@ -123,7 +125,7 @@ select menu in "${lista[@]}"
       As opções rápidas do menu alterarão de qlqr monitor conectado, se quiser
       fazer para um monitor específico, usar a opção personalizada e botar o
       output do monitor específico e a resolução que quer modificar.
-      Os outputs podem ser verificados na opção de listagem.
+      Os outputs podem ser verificados na opção de 'listagem' e 'informações'.
       --------------------------------------------------------------------------
       Script criado por: Matheus Laidler 
                           ~Github.com/matheuslaidler ~matheuslaidler.github.io
