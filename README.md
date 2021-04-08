@@ -37,7 +37,7 @@ Versão atual: 2.0
 Curiosidade: Após mudar a resolução pelo script e rodar dnv, a nova resolução é reconhecida no scan
 
 ![ResNova](https://user-images.githubusercontent.com/76860503/113951505-10819000-97ea-11eb-8562-613005f925bb.png)
-###### (  Imagem + antiga - da penultima atualização - apenas para mostrar a resolução atualizada  )
+###### (  Imagem antiga - da penultima atualização - apenas para mostrar a resolução atualizada  )
 
 ### Créditos
 Criador: Matheus Laidler 
