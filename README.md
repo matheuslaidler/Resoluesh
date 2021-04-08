@@ -32,8 +32,7 @@ Versão atual: 2.0
  Irá carregar o logo, o scan e o menu
 Após mudar a resolução, ela é reconhecida no scan, se rodar dnv:
 
-![novaresolucao](https://user-images.githubusercontent.com/76860503/113951142-5ee25f00-97e9-11eb-8bb9-ad81cd11881c.png)
-
+![novaresolucao](https://user-images.githubusercontent.com/76860503/113951320-baace800-97e9-11eb-9e10-ea11b74cc813.png)
 
 ### Créditos
 Criador: Matheus Laidler 
