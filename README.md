@@ -8,7 +8,7 @@
  Eu usei o shell para mudar a resolução da máquina e desbugar a aplicação, daí tive a ideia de fzr isso de forma automatizada e disponibiliza-la para todos e para qlqr tipo de monitor, também sendo útil para outros tipos de situaçes.
  
  
-#### Mais sobre o script; 
+### Informaçes adicionais; 
 Versão atual: 2.0
   Notas de atualização:
   - Nova funcionalidade: Foi adicionado ao menu a opção (personalizada) - agora pode escolher em qual monitor quer mudar a resolução, sem ser obrigado a alterar em todos eles (Antes so tinha a opço de personalizar uma resolução específica, mas continuava indo em todos os monitores - o que é sem problemas pra quem tem apenas um - agora temos a opção para selecionar um monitor específico com uma resolução específica também)
