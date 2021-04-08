@@ -21,22 +21,19 @@
 
 echo "
 **********************************************************************
-		       Simulador de Resolução 
-      Consiga transformar seu monitor em um fullHD.
+		     Simulador de Resolução 
+     Consiga transformar seu monitor para maior resolução.
  Problemas de resoluções (como de aplicações) podem ser resolvidos.
-**********************************************************************
-"
+**********************************************************************"
 sleep 0.35s
 echo "Escaneando entradas de vídeo..." 
 sleep 1.2s
-echo "Encontrado monitor primário: "
-  xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
-sleep 0.5s
-echo "
-Carregando script... "
-sleep 0.5s
-echo "
- ====================================================================
+echo " * Encontrado monitor primário: " 
+xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
+sleep 0.8s
+echo " Carregando script... "
+sleep 1s
+echo " ====================================================================
  NOTAS;
   -Opçôes rápidas de resolução do menu podem afetar outros monitores 
    conectados.Para um monitor específico use a opção 'Personalizada';
@@ -51,7 +48,7 @@ sleep 0.4s
 echo "  Menu de utilização: 
 ______________________________________________________________________"
 
-lista=("Help" "Listagem" "Monitor Primário" "1920x1080" "1440x900" "1440x830" "1366x768" "1360x768" "1280x1024" "1280x768" "1280x720" "Outra Resolução" "Personalizada" "Finalizar")
+lista=("Help" "Listagem" "Monitor Primário" "1920x1080" "1440x900" "1440x830" "1366x768" "1360x768" "1280x1024" "1280x768" "1280x720" "Outra Resolução" "Personalizada" "Informações" "Finalizar")
 
 select menu in "${lista[@]}"
  do
@@ -255,6 +252,17 @@ Processo concluído com sucesso!!
           xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol &1>/dev/null &2>/dev/null
     fi
          echo "
+Processo concluído com sucesso!!
+<> Para voltar o menu aperte Enter <>
+          "
+         ;;
+        "Informações")
+          echo "Mais informações do(s) monitor(es) e as conexões
+          "
+        xdpyinfo | grep "default screen" | cut -d " " -f 4 && xdpyinfo | grep "screen" && xdpyinfo | grep "dimensions" | cut -d " " -f 3,7
+        echo
+        xrandr --verbose | grep "x"
+        echo "
 Processo concluído com sucesso!!
 <> Para voltar o menu aperte Enter <>
           "
