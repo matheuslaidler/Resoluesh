@@ -33,11 +33,22 @@ echo " Encontrado monitor primário: "
 xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
 sleep 0.5s
 echo "
-Carregando menu... "
+Carregando opções... "
 sleep 1s
+echo "
+  ---------------------------------------------------------------------
+  NOTAS;
+   -Opçôes rápidas de resolução do menu podem afetar outros monitores 
+    conectados. Para um monitor específico use a opção 'Personalizada';
+   -Após usar alguma opção, pode pressionar 'enter' para abrir o menu;
+   -As resoluçes voltarão ao padrão do monitor após desligar a máquina;
+   -Para mais informaçes acesse a opção 'Help' no menu abaixo; 
+  ---------------------------------------------------------------------
+   "
+sleep 1.2s
 
 echo "
-Menu de utilização:"
+Menu de utilização: "
 
 lista=("Help" "Listagem" "Monitor Primário" "1920x1080" "1440x900" "1440x830" "1366x768" "1360x768" "1280x1024" "1280x768" "1280x720" "Outra Resolução" "Personalizada" "Finalizar")
 
@@ -66,7 +77,7 @@ select menu in "${lista[@]}"
   de usar para qualquer um que so quer testar resolução mais alta (ou mais baixa).
 **Lembre-se: Sempre que reiniciar o PC a resolução voltará ao padrão do monitor**
 
-Como usar:
+~Como usar:
   Caso queira usar uma resolução diferente, acesse o menu e selecione a 
   opção adequada a sua escolha. Temos diversas resoluções úteis, mas caso
   elas não sejam suficiente, você pode colocar a resolução que quiser na
@@ -93,7 +104,7 @@ Como usar:
   **Caso precise... bote a mão na massa**
   ((saiba como o script foi feito - se quiser pode fazer o processo manualmente))
   
-  Faça você mesmo:
+  ~Faça você mesmo:
   <Principalmente em caso de erros> 
   Aprenda agr a testar os comandos que usamos no script de forma manual:
   Nosso script se baseia na utilização do 'xrandr', nele vc verificará o
@@ -105,7 +116,7 @@ Como usar:
         Alterando: VGA-0 pelo seu dado no comando xrandr 
                    1920x1080 pela resolução desejada
 ********************************************************************************
-      Resumo geral de uso para o script de forma correta e funcional
+  ~   Resumo geral de uso para o script de forma correta e funcional
       --------------------------------------------------------------------------
       Esse script é útil para quem não quer ter q ficar lembrando e fazendo esse
       comando direto. Já foi feito pra funcionar de forma global,em qlqr entrada,
@@ -208,13 +219,9 @@ Processo concluído com sucesso!!
         "Outra Resolução")
             echo "Digite a resolução desejada:"
             read resolucao
-          if [[ $output == "" ]];
+          if [[ $resolucao == "" ]];
           then 
-          echo "Nada foi declarado. Operação cancelada" 
-          exit
-          elif [[ $resol == "" ]];
-          then
-          echo "Nada foi declarado. Operação cancelada" 
+          echo "Nada declarado. Operação cancelada" 
           exit
           else
             xrandr --output VGA-0 --scale-from $resolucao & xrandr --output VGA-1-1 --scale-from $resolucao & xrandr --output HDMI-0 --scale-from $resolucao & xrandr --output HDMI-1-1 --scale-from $resolucao & xrandr --output HDMI-1-2 --scale-from $resolucao & xrandr --output HDMI-1-3 --scale-from $resolucao & xrandr --output DVI-D-0 --scale-from $resolucao & xrandr --output DP-1-1 --scale-from $resolucao &1>/dev/null &2>/dev/null
@@ -226,22 +233,22 @@ Processo concluído com sucesso!!
           ;;
         	"Personalizada")
 	          echo "Opção personalizada
- Escolha o monitor colocando seu output (exemplo: VGA-0) e a resolução específica (1920x1080)
--Se precisar de ajuda, no comando Help explica como usar de forma resumida-
+ Escolha o monitor colocando seu output (exemplo: VGA-0) e a resolução específica (exemplo: 1920x1080)
+  - Se precisar de ajuda, usar a opção Help ou a página do github
 "
-	  echo "Digite o output
-    -Letra maiúscula + com caractere especial e numeração- (exemplo: HDMI-0)"
+	  echo "Digite o output do monitor desejado
+    -Letra maiúscula; caractere especial (-) e numeração (exemplo: HDMI-0)"
 	  read output
-	  echo "Digite a resolução
-    -Numeração na ordem correta- (exemplo: 1280x720)"
+	  echo "Digite a resolução desejada
+     - Numeração na ordem correta e sem espaços (exemplo: 1280x720)"
 	  read resol
     if [[ $output == "" ]];
     then 
-    echo "Nada foi declarado. Operação cancelada" 
+    echo "Alguma(s) opção(ões) não foram declaradas. Operação cancelada" 
     exit
     elif [[ $resol == "" ]];
     then
-    echo "Nada foi declarado. Operação cancelada" 
+    echo "Alguma(s) opção(ões) não foram declaradas. Operação cancelada"
     exit
     else
           xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol &1>/dev/null &2>/dev/null
