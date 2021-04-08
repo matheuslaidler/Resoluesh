@@ -4,8 +4,8 @@
 #
 #RESOLUE - Script para forçar novas resoluções de forma automatizada
 #Autor: Matheus Laidler
-#Versão: 2.0
-#Fase de testes finalizada
+#Versão: 1.0
+#Fase de testes
 #
 #Programa para alteração da resolução da tela
 #Programa criado para agilizar o processo de mudança de resolução com xrandr
@@ -20,35 +20,36 @@
 ####################################################################################################################################################
 
 echo "
-***********************************************************************
+**********************************************************************
 		       Simulador de Resolução 
-         Consiga transformar seu monitor em um fullHD.
-  Problemas de resoluções (como de aplicações) podem ser resolvidos.
-***********************************************************************
+      Consiga transformar seu monitor em um fullHD.
+ Problemas de resoluções (como de aplicações) podem ser resolvidos.
+**********************************************************************
 "
 sleep 0.35s
 echo "Escaneando entradas de vídeo..." 
 sleep 1.2s
-echo " Encontrado monitor primário: "
-xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
+echo "Encontrado monitor primário: "
+  xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
 sleep 0.5s
 echo "
-Carregando opções... "
+Carregando script... "
+sleep 0.5s
+echo "
+ ====================================================================
+ NOTAS;
+  -Opçôes rápidas de resolução do menu podem afetar outros monitores 
+   conectados.Para um monitor específico use a opção 'Personalizada';
+  -Após usar alguma opção, pode pressionar 'enter' para abrir o menu;
+  -As resoluçes voltarão ao padrão do monitor após desligar o PC;
+  -Para mais informaçes acesse a opção 'Help' no menu abaixo; 
+ ===================================================================="
 sleep 1s
-echo "
-  ---------------------------------------------------------------------
-  NOTAS;
-   -Opçôes rápidas de resolução do menu podem afetar outros monitores 
-    conectados. Para um monitor específico use a opção 'Personalizada';
-   -Após usar alguma opção, pode pressionar 'enter' para abrir o menu;
-   -As resoluçes voltarão ao padrão do monitor após desligar a máquina;
-   -Para mais informaçes acesse a opção 'Help' no menu abaixo; 
-  ---------------------------------------------------------------------
-   "
-sleep 1.2s
-
-echo "
-Menu de utilização: "
+echo "                   Criado por Matheus Laidler
+______________________________________________________________________"
+sleep 0.4s
+echo "  Menu de utilização: 
+______________________________________________________________________"
 
 lista=("Help" "Listagem" "Monitor Primário" "1920x1080" "1440x900" "1440x830" "1366x768" "1360x768" "1280x1024" "1280x768" "1280x720" "Outra Resolução" "Personalizada" "Finalizar")
 
@@ -283,5 +284,4 @@ Finalizando...
          ;;
   esac
  done
-
 #Fim
