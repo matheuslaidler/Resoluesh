@@ -19,12 +19,15 @@ Versão atual: 2.0
   - Design corrigido;
   - Imagens da postagem atualizadas;
   - Nova opção do menu: Informaões - mostra informações extras sobre a tela e todos os outputs.
+
 ## Como usar?
+###### Baixe o script -> botão direito nele -> propriedades -> permissões -> executar como um programa -> terminal: $ ./Resolue.sh
 ![permissão1](https://user-images.githubusercontent.com/76860503/113920112-c208cd00-97ba-11eb-9ea4-aee0342a3c30.png)
  
  O script terá uma aba de ajuda, onde mostra como e porque o programa foi feito, como utilizar o script da forma correta e como você pode fazer manualmente tudo o que o script faz, te dando os comandos caso o script não funcione na sua máquina por algum motivo ( parte: Faça você mesmo ).
  Para utilizar o script é necessário, obviamente, utilizar alguma distribuição Linux (Ainda não testado no WSL2). 
- Depois será importante dar permissão para o arquivo poder ser executado como um script. Basta clicar com o boto direito, ir em permissões e selecionar que esse arquivo pode ser um executável como um programa. Também pode ser feito com o comando 'chmod +x resoluesh.sh' dentro da basta onde ele se encontra.
+ Depois será importante dar permissão para o arquivo poder ser executado como um script. Basta clicar com o boto direito, ir em propriedades, dps em permissões e selecionar que esse arquivo pode ser executado como um programa. 
+  De maneira mais prática, pode ser feito com o comando 'chmod +x resoluesh.sh' dentro da basta onde ele se encontra, e logo em seguida executar o script.
 
 ![permissão2](https://user-images.githubusercontent.com/76860503/113920464-317ebc80-97bb-11eb-84cb-aee1f503b0bf.png)
  
