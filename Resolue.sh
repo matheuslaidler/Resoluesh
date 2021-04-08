@@ -4,8 +4,8 @@
 #
 #RESOLUE - Script para forçar novas resoluções de forma automatizada
 #Autor: Matheus Laidler
-#Versão: 1.0
-#Fase de testes
+#Versão: 2.0
+#Fase de testes finalizada
 #
 #Programa para alteração da resolução da tela
 #Programa criado para agilizar o processo de mudança de resolução com xrandr
