@@ -1,5 +1,5 @@
 # ResolueSH
-![Resoluesh2](https://user-images.githubusercontent.com/76860503/113950887-c815a280-97e8-11eb-8c2d-32be11751ddc.png)
+![scriptResolueSH](https://user-images.githubusercontent.com/76860503/113955815-d2d53500-97f2-11eb-8767-c9069454eace.png)
 
  Script que altera a resolução da sua tela de acordo com a escolha do usuário, podendo testar diversas sem problemas - mesmo que não tenha nas opções de seu monitor. 
  Ele funciona mais como uma simulação de resolução, após reiniciar a máquina a resolução volta ao padrão do monitor. 
@@ -34,7 +34,7 @@ Versão atual: 2.0
 Após mudar a resolução, ela é reconhecida no scan, se rodar dnv:
 
 ![ResNova](https://user-images.githubusercontent.com/76860503/113951505-10819000-97ea-11eb-8562-613005f925bb.png)
-
+###### Imagem da penultima atualização (apenas para mostrar que a resolução atualiza)
 
 ### Créditos
 Criador: Matheus Laidler 
