@@ -1,4 +1,9 @@
 # ResolueSH
+
+## Importante! Script recém atualizado e otimizado! 
+- Acabei tirando as opções antigas **cheias de resoluções** e deixei a **personalizada**, basta digitar qual quer junto do output sempre. Tudo foi feito de uma forma bem melhor organizada, funcional e otimizado com os conhecimentos atuais, porém não pode ser testado na prática, pois não eu estava podendo usar linux ou wsl no momento q foi feito a atualização. Em breve posso atualizar o post com as novas imagens da prática. *Teoricamente tudo funciona perfeitamente.*
+
+
 ![ScriptResolue2](https://user-images.githubusercontent.com/76860503/113959265-e97e8a80-97f8-11eb-9d1c-b6b9088a6a03.png)
 
  Script que altera a resolução da sua tela de acordo com a escolha do usuário, podendo testar diversas sem problemas - mesmo que não tenha nas opções de seu monitor. 
