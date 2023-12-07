@@ -1,97 +1,126 @@
 #!/bin/bash
+#Explicação Bloco-0
+#Esta primeira linha acima, chamada shebang, informa ao sistema que este é um script bash.
 
+
+#Comentários do Autor#
 ####################################################################################################################################################
 #
-#RESOLUE - Script para forçar novas resoluções de forma automatizada
+#RESOLUE.sh - Script para forçar novas resoluções de forma automatizada e temporária
+#Primeiro comando para poder utilizar o script: chmod +x Resolue.sh
 #Autor: Matheus Laidler
-#Versão: 1.0
-#Fase de testes
+#Versão: 2.0
 #
 #Programa para alteração da resolução da tela
-#Programa criado para agilizar o processo de mudança de resolução com xrandr
-#Agora pode alterar a resolução de todos os monitores conectados, de apenas um deles, e com a resolução que você quiser.
-#Meu editor de video ficava com bug de resolução, so funcionava direito em resolução mais alta que a máxima do monitor.
-#Com esse script foi possível fazer essa mudança de resolução para poder usar o programa sem o problema.
-#Assim sendo, com esse script vocẽ pode 'transformar' seu monitor em um fullHD. 
+#Programa criado para agilizar o processo de mudança de resolução com xrandr.
+#Assim poderá usar temporariamente uma resolução maior enquanto trabalha, por exemplo, em uma edição.
+#Meu editor de video ficava com bug de resolução, so funcionava direito em resolução mais alta que a máxima do monitor e esse script ajudou bastante.
+#Assim sendo, com esse script vocẽ pode 'transformar' seu monitor em um fullHD, caso não use um.
 #Ele se baseia no comando de 'Resize and Rotate' -comando oficial linux: xrandr
 #
-#Midias: matheuslaidler.github.io; github.com/matheuslaidler; facebook.com/matheuslaidler; instagram.com/matheuslaidler; youtube.com/channel/UCkFbbZX6TG6eZPugmW32YFA
+#Midias: matheuslaidler.github.io; github.com/matheuslaidler; facebook.com/matheus.laidler; instagram.com/matheuslaidler; youtube.com/channel/UCkFbbZX6TG6eZPugmW32YFA; matheuslaidler.gitbook.io
 #
 ####################################################################################################################################################
 
-echo "
-**********************************************************************
-		     Simulador de Resolução 
-     Consiga transformar seu monitor para maior resolução.
- Problemas de resoluções (como de aplicações) podem ser resolvidos.
-**********************************************************************"
-sleep 0.35s
-echo "Escaneando entradas de vídeo..." 
-sleep 1.2s
-echo " * Encontrado monitor primário: " 
-xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1 #type + resolutiuon
-sleep 0.8s
-echo " Carregando script... "
-sleep 1s
-echo " ====================================================================
- NOTAS;
-  -Opçôes rápidas de resolução do menu podem afetar outros monitores 
-   conectados.Para um monitor específico use a opção 'Personalizada';
+#Explicação Bloco-1
+#Esta linha está obtendo informações sobre o monitor primário conectado usando o comando xrandr e armazenando-as na variável primary_info.
+primary_info=$(xrandr | grep 'connected primary' | cut -d " " -f 1,4 | cut -d "+" -f 1)
+
+#Explicação Bloco-2
+#Criação de funções em comum para serem usados no decorrer do script, como delay com mensagem e conclusão de alguma função para retornar ao menu.
+# Função para exibir mensagens com espera
+function show_message() {
+  echo "$1"
+  sleep "$2"
+}
+# Função para exibir mensagem de conclusão e retornar ao menu
+function show_completion_message() {
+  echo "Processo concluído com sucesso!!"
+  read -p "<> Para voltar ao menu aperte Enter <>"
+}
+
+#Explicação Bloco-3
+#Esta é a definição da função principal criada chamada de 'display_resolution', que altera a resolução do monitor especificado, usando xrandr.
+#Como a maioria deve saber, o &>/dev/null serve para não printar na tela toda a saída do comando na hora. Nessa hora você só quer ver o resultado da mudança de resolução, e não várias coisas sujando o terminal.
+#Essas variáveis passadas na função são chamados de parâmetros posicionais. $1 ganha um valor como variável do sistema passada pelo usuário, e o $2 como a segunda, elas se referem ao primeiro e ao segundo argumento passado para a função, respectivamente.
+function display_resolution() {
+  local output=$1
+  local resolution=$2
+
+  if [[ $output != "" && $resolution != "" ]]; then
+    xrandr --output $output --scale-from $resolution &>/dev/null
+    show_completion_message
+  else
+    echo "Alguma(s) opção(ões) não foram declaradas. Operação cancelada"
+    exit
+  fi
+}
+
+#Explicação Bloco-4
+#Estas linhas estão imprimindo uma mensagem de boas vindas, notas, loadings e etc;
+#Aqui chamamos o bloco-1 para captura de informações dos monitores
+#Usamos sleep para dar delay de tempo para o próximo comando.
+#Printamos as opções que iremos usar no menu de navegação.
+echo "**********************************************************************"
+echo "		     Simulador de Resolução"
+echo "     Consiga transformar seu monitor para maior resolução"
+echo "**********************************************************************"
+show_message "Escaneando entradas de vídeo..." 1.2s
+echo "$primary_info"
+show_message "Carregando script..." 1s
+echo "===================================================================="
+echo "NOTAS;"
+echo " NOTAS;
+  -Selecionar algum dos monitores específicos dado no escaneamento;
+  -Se o monitor não apareceu, mas souber a identificação com base no padrão apresentado (ex:VGA-0), tente passar como entrada;
   -Após usar alguma opção, pode pressionar 'enter' para abrir o menu;
-  -As resoluçes voltarão ao padrão do monitor após desligar o PC;
-  -Para mais informaçes acesse a opção 'Help' no menu abaixo; 
- ===================================================================="
-sleep 1s
-echo "                   Criado por Matheus Laidler
-______________________________________________________________________"
-sleep 0.4s
-echo "  Menu de utilização: 
-______________________________________________________________________"
+  -As resoluçes voltarão ao padrão do monitor após reiniciar o PC;
+  -Para mais informaçes acesse a opção 'Help' no menu abaixo; "
+echo "===================================================================="
+sleep 0.85s
+echo "Criado por Matheus Laidler"
+sleep 0.5s
 
-lista=("Help" "Listagem" "Monitor Primário" "1920x1080" "1440x900" "1440x830" "1366x768" "1360x768" "1280x1024" "1280x768" "1280x720" "Outra Resolução" "Personalizada" "Informações" "Finalizar")
-
-select menu in "${lista[@]}"
- do
+#Explicação Bloco-5
+#prints das opções do menu case + menu funcional
+#loop select será explicado separadamente no final dela.
+echo "Menu de utilização:"
+echo "1. Help"
+echo "2. Listagem"
+echo "3. Monitor Primário"
+echo "4. 1920x1080"
+echo "5. Resolução Personalizada"
+echo "6. Informações"
+echo "7. Finalizar"
+#loop select com prints, xrandr, $primary_info e display_resolution nas funções por trás de cada escolha.
+select menu in "Help" "Listagem" "Monitor Primário" "1920x1080" "Resolução Personalizada" "Informações" "Finalizar"
+do
   case $menu in
-       "Help")
-        echo " 
-  ******************************************************************************
-        Sobre o projeto + Ajuda
-  ******************************************************************************    
-        Sobre o script;
-  Algumas pessoas podem precisar de alguma ajuda com problemas de 
+    "Help")
+      echo "Sobre o projeto + Ajuda 
+	   Algumas pessoas podem precisar de alguma ajuda com problemas de 
   resolução de tela e esse script pode ser a ferramenta correta.
-  Nele podemos colocar resolução que nem é mostrada nas opções do monitor 
-  por padrão.
-  Algumas aplicações podem ficar bugados em monitores de resoluções mais baixas
-  podendo resolver o problema botando uma resolução mais alta como fullHD. 
-    No meu Davinci Resolve bugado funcionou com a resolução 1440x830 
-    (melhor pra ver nesse monitor de resolução máxima 1366x768 da Samsumg).
-    -Esse bug é um que fica uma janela (mesmo sendo maximizado) 
-    imóvel e fixado pra parte direita do monitor, assim tendo uma parte 
-    dele cortada sem poder ser utilizada.
-  Assim vemos que problemas referentes a resolução podem ter a chance de
-  serem resolvidos com este script. Além de ser um script fácil e prático
-  de usar para qualquer um que so quer testar resolução mais alta (ou mais baixa).
-**Lembre-se: Sempre que reiniciar o PC a resolução voltará ao padrão do monitor**
-
-~Como usar:
+  
+  ~Como usar:
   Caso queira usar uma resolução diferente, acesse o menu e selecione a 
-  opção adequada a sua escolha. Temos diversas resoluções úteis, mas caso
-  elas não sejam suficiente, você pode colocar a resolução que quiser na
-  opção 'Outra Resolução' (12). Nela você digitará a resolução que quer.
-   Para usar o menu é só digitar o nmr específico da resolução/opção que 
-   deseja. Se quiser voltar ao menu aperte ENTER dnv.
-   Caso queira usar o script para algum monitor específico (e não ir em todos
-   os monitores conectados, caso tenha mais de um) Vá na opção 'Personalizada' 
-   e digite o output ( exemplo: VGA-0 ) e a resolução ( exemplo: 1280x720 ) 
+  opção adequada a sua escolha, se precisar voltar pra resolução original,
+  apenas refaça o mesmo procedimento recolocando sua resolução anterior.
+  Na opção resolução personalizada você digitará a resolução que quiser.
+  
+   Para usar o menu é só digitar o nmr específico da opção que deseja. 
+	
+	Em geral funciona com você tendo que digitar o output e a resolução,
+	caso selecione 1080p só precisará do output, que é referente ao monitor.
+	output - exemplo: VGA-0, e a resolução - exemplo: 1280x720;
+	
     Para ter essas informações, selecione a opção de listagem do menu e veja quais
     estão conectados (e onde n tem nada conectado) e seus respectivos outputs.
+	
     Também pode ver o output e a resolução do seu monitor pela opção 'monitor 
     principal', se tiver apenas um monitor já é o bastante. Pode ver todas as
     informações de outputs e as resoluções na opção 'Informações' do menu.
-    
- *Para a resolução personalizada*
+      
+	  *Para a resolução personalizada*
    AVISO: Precisa ser escrita no formato exato a como estão no Menu.
      (Ou seja, usar sem espaços e com o 'x')
       Exemplo de como usar (após selecionar 12):    1920x1080       (V)
@@ -115,6 +144,7 @@ select menu in "${lista[@]}"
             xrandr --output VGA-0 --scale-from 1920x1080 
         Alterando: VGA-0 pelo seu dado no comando xrandr 
                    1920x1080 pela resolução desejada
+				   
 ********************************************************************************
   ~   Resumo geral de uso para o script de forma correta e funcional
       --------------------------------------------------------------------------
@@ -122,10 +152,9 @@ select menu in "${lista[@]}"
       comando direto. Já foi feito pra funcionar de forma global,em qlqr entrada,
       mas se não der, tente fazer manualmente com o comando direto no shell.
       A resolução volta ao padrão do monitor sempre que o pc é desligado.
-      As opções rápidas do menu alterarão de qlqr monitor conectado, se quiser
-      fazer para um monitor específico, usar a opção personalizada e botar o
-      output do monitor específico e a resolução que quer modificar.
       Os outputs podem ser verificados na opção de 'listagem' e 'informações'.
+	  Caso a alteração de resolução tenha ido de qlqr monitor conectado, reveja
+	  qual o output correto do monitor específico ou tente trocar.
       --------------------------------------------------------------------------
       Script criado por: Matheus Laidler 
                           ~Github.com/matheuslaidler ~matheuslaidler.github.io
@@ -133,177 +162,54 @@ select menu in "${lista[@]}"
 ********************************************************************************
 Página de ajuda finalizada!!
 <> Para voltar o menu aperte Enter <>
-          "
-        ;;
-       "Listagem")
-          echo "
-          ---------------------------------------------------------
-          Listagem de telas e entradas conectadas e as sem conexão:
-          ---------------------------------------------------------"
-          xrandr | cut -d " " -f 1,2 | grep 'connected'
-         #xrandr | cut -d " " -f 1,2 
-            echo "
-          
-Listagem concluía com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-       "Monitor Primário")
-            echo " 
-            ------------------------------------------------------
-            Relembrando as informações gerais do seu monitor atual
-            ------------------------------------------------------ "
-            echo "  
-Output:"
-            xrandr | grep 'connected primary' | cut -d " " -f 1 
-            echo "
-Resolução:"
-            xrandr | grep 'connected primary' | cut -d " " -f 4 | cut -d "+" -f 1 
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1920x1080")
-            xrandr --output VGA-0 --scale-from 1920x1080 & xrandr --output VGA-1-1 --scale-from 1920x1080 & xrandr --output HDMI-0 --scale-from 1920x1080 & xrandr --output HDMI-1-1 --scale-from 1920x1080 & xrandr --output HDMI-1-2 --scale-from 1920x1080 & xrandr --output HDMI-1-3 --scale-from 1920x1080 & xrandr --output DVI-D-0 --scale-from 1920x1080 & xrandr --output DP-1-1 --scale-from 1920x1080 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1440x900")
-            xrandr --output VGA-0 --scale-from 1440x900 & xrandr --output VGA-1-1 --scale-from 1440x900 & xrandr --output HDMI-0 --scale-from 1440x900 & xrandr --output HDMI-1-1 --scale-from 1440x900 & xrandr --output HDMI-1-2 --scale-from 1440x900 & xrandr --output HDMI-1-3 --scale-from 1440x900 & xrandr --output DVI-D-0 --scale-from 1440x900 & xrandr --output DP-1-1 --scale-from 1440x900 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1440x830")
-            xrandr --output VGA-0 --scale-from 1440x830 & xrandr --output VGA-1-1 --scale-from 1440x830 & xrandr --output HDMI-0 --scale-from 1440x830 & xrandr --output HDMI-1-1 --scale-from 1440x830 & xrandr --output HDMI-1-2 --scale-from 1440x830 & xrandr --output HDMI-1-3 --scale-from 1440x830 & xrandr --output DVI-D-0 --scale-from 1440x830 & xrandr --output DP-1-1 --scale-from 1440x830 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1366x768")
-            xrandr --output VGA-0 --scale-from 1366x768 & xrandr --output VGA-1-1 --scale-from 1366x768 & xrandr --output HDMI-0 --scale-from 1366x768 & xrandr --output HDMI-1-1 --scale-from 1366x768 & xrandr --output HDMI-1-2 --scale-from 1366x768 & xrandr --output HDMI-1-3 --scale-from 1366x768 & xrandr --output DVI-D-0 --scale-from 1366x768 & xrandr --output DP-1-1 --scale-from 1366x768 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1360x768")
-            xrandr --output VGA-0 --scale-from 1360x768 & xrandr --output VGA-1-1 --scale-from 1360x768 & xrandr --output HDMI-0 --scale-from 1360x768 & xrandr --output HDMI-1-1 --scale-from 1360x768 & xrandr --output HDMI-1-2 --scale-from 1360x768 & xrandr --output HDMI-1-3 --scale-from 1360x768 & xrandr --output DVI-D-0 --scale-from 1360x768 & xrandr --output DP-1-1 --scale-from 1360x768 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1280x1024")
-            xrandr --output VGA-0 --scale-from 1280x1024 & xrandr --output VGA-1-1 --scale-from 1280x1024 & xrandr --output HDMI-0 --scale-from 1280x1024 & xrandr --output HDMI-1-1 --scale-from 1280x1024 & xrandr --output HDMI-1-2 --scale-from 1280x1024 & xrandr --output HDMI-1-3 --scale-from 1280x1024 & xrandr --output DVI-D-0 --scale-from 1280x1024 & xrandr --output DP-1-1 --scale-from 1280x1024 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1280x768")
-            xrandr --output VGA-0 --scale-from 1280x768 & xrandr --output VGA-1-1 --scale-from 1280x768 & xrandr --output HDMI-0 --scale-from 1280x768 & xrandr --output HDMI-1-1 --scale-from 1280x768 & xrandr --output HDMI-1-2 --scale-from 1280x768 & xrandr --output HDMI-1-3 --scale-from 1280x768 & xrandr --output DVI-D-0 --scale-from 1280x768 & xrandr --output DP-1-1 --scale-from 1280x768 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "1280x720")
-            xrandr --output VGA-0 --scale-from 1280x720 & xrandr --output VGA-1-1 --scale-from 1280x720 & xrandr --output HDMI-0 --scale-from 1280x720 & xrandr --output HDMI-1-1 --scale-from 1280x720 & xrandr --output HDMI-1-2 --scale-from 1280x720 & xrandr --output HDMI-1-3 --scale-from 1280x720 & xrandr --output DVI-D-0 --scale-from 1280x720 & xrandr --output DP-1-1 --scale-from 1280x720 &>/dev/null
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        "Outra Resolução")
-            echo "
-            -----------------------------
-            Digite a resolução desejada:
-            -----------------------------"
-            read resolucao
-          if [[ $resolucao == "" ]];
-          then 
-          echo "Nada declarado. Operação cancelada" 
-          exit
-          else
-            xrandr --output VGA-0 --scale-from $resolucao & xrandr --output VGA-1-1 --scale-from $resolucao & xrandr --output HDMI-0 --scale-from $resolucao & xrandr --output HDMI-1-1 --scale-from $resolucao & xrandr --output HDMI-1-2 --scale-from $resolucao & xrandr --output HDMI-1-3 --scale-from $resolucao & xrandr --output DVI-D-0 --scale-from $resolucao & xrandr --output DP-1-1 --scale-from $resolucao &1>/dev/null &2>/dev/null
-          fi
-            echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-          ;;
-        	"Personalizada")
-	          echo "
- ------------------------------------------------------------------------------------------------------
-  Opção personalizada
- Escolha o monitor colocando seu output (exemplo: VGA-0) e a resolução específica (exemplo: 1920x1080)
- - Se precisar de ajuda, usar a opção Help ou a página do github
- ------------------------------------------------------------------------------------------------------
-"
-	  echo "Digite o output do monitor desejado
-    -Letra maiúscula; caractere especial (-) e numeração (exemplo: HDMI-0)"
-	  read output
-	  echo "Digite a resolução desejada
-     - Numeração na ordem correta e sem espaços (exemplo: 1280x720)"
-	  read resol
-    if [[ $output == "" ]];
-    then 
-    echo "Alguma(s) opção(ões) não foram declaradas. Operação cancelada" 
-    exit
-    elif [[ $resol == "" ]];
-    then
-    echo "Alguma(s) opção(ões) não foram declaradas. Operação cancelada"
-    exit
-    else
-          xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol & xrandr --output $output --scale-from $resol &1>/dev/null &2>/dev/null
-    fi
-         echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-         ;;
-        "Informações")
-          echo "
-          ------------------------------------------------
-          Mais informações do(s) monitor(es) e as conexões
-          ------------------------------------------------"
-        xdpyinfo | grep "default screen" | cut -d " " -f 4 && xdpyinfo | grep "screen" && xdpyinfo | grep "dimensions" | cut -d " " -f 3,7
-        echo
-        xrandr --verbose | grep "x"
-        echo "
-Processo concluído com sucesso!!
-<> Para voltar o menu aperte Enter <>
-          "
-         ;;
-        "Finalizar")
-          sleep 0.35s
-          echo "
-Obrigado pela preferência!! "
-          sleep 0.5s
-          echo "
-        ----------------------------------  
-        Crédios: Matheus Laidler (Criador)
-        ----------------------------------  
-          "
-          sleep 0.5s
-          echo "
-Finalizando...
-          "
-          sleep 1s
-
-          break
-         ;;
-        *) echo "Desculpe... 
-  Opção não reconhecida. Favor, tente novamente digitando o número correspondente a sua escolha de forma correta
-    -Se precisar voltar ao menu, aperte ENTER-
-              "
-         ;;
+        "  
+	  ;;
+    "Listagem")
+      echo "Listagem de telas e entradas conectadas e as sem conexão:"
+      xrandr | cut -d " " -f 1,2 | grep 'connected'
+      echo "Listagem concluída com sucesso!!"
+      read -p "<> Para voltar ao menu aperte Enter <>"
+      ;;
+    "Monitor Primário")
+      echo "Relembrando as informações gerais do seu monitor atual"
+      echo "Output: $(echo $primary_info | cut -d " " -f 1)"
+      echo "Resolução: $(echo $primary_info | cut -d " " -f 2)"
+      echo "Processo concluído com sucesso!!"
+      read -p "<> Para voltar ao menu aperte Enter <>"
+      ;;
+    "1920x1080")
+      echo "Digite o output do monitor desejado (exemplo: HDMI-0)"
+      read output
+      display_resolution "$output" "1920x1080"
+      ;;
+    "Resolução Personalizada")
+      read -p "Digite o output do monitor desejado (exemplo: HDMI-0): " output
+	  read -p "Digite a resolução desejada (exemplo: 1280x720): " resol
+	  display_resolution "$output" "$resol"
+      ;;
+    "Informações")
+      echo "Mais informações do(s) monitor(es) e as conexões"
+      echo "Default Screen: $(xdpyinfo | grep 'default screen' | cut -d " " -f 4)"
+      xdpyinfo | grep "screen" && xdpyinfo | grep "dimensions" | cut -d " " -f 3,7
+      echo
+      xrandr --verbose | grep "x"
+      echo "Processo concluído com sucesso!!"
+      read -p "<> Para voltar ao menu aperte Enter <>"
+      ;;
+    "Finalizar")
+      echo "Créditos: Matheus Laidler (Criador)"
+      echo "Finalizando..."
+      sleep 1s
+      break
+      ;;
+    *)
+      echo "Desculpe... 
+	  Opção não reconhecida."
+      ;;
   esac
- done
-#Fim
+done
+#Explicação do Select Menu Loop;
+#Este é um loop select que apresenta um menu ao usuário e executa diferentes ações com base na seleção do mesmo.
+#Cada caso dentro do bloco case corresponde a uma opção de menu. Por exemplo, a opção “Help” imprime uma mensagem de ajuda, a opção “Listagem” lista todas as telas e entradas conectadas, e assim por diante. Vc pdoe imaginar como se fosse uma lista em q cada parte tem um conteúdo específico, vai buscar em qual deles é do valor q foi digitado e te mostrar o conteúdo tal, se a opção não existir, ele carregará o código que temos na opção *)
+#Decidi não usar o echo e read por aqui agora, e sim apenas o read -p.
+#Ambas as formas de solicitar a entrada do usuário são corretas e funcionarão. A diferença entre as duas é principalmente estilística e depende de como você prefere estruturar seu código. Usar read -p permite que você exiba uma mensagem ao usuário e leia a entrada do usuário na mesma linha. Isso pode tornar o código um pouco mais conciso. Por outro lado, usar echo para exibir a mensagem e read para ler a entrada do usuário pode tornar o código um pouco mais claro para alguns, especialmente se você estiver fazendo algo mais complexo entre a exibição da mensagem e a leitura da entrada. A função criada lá encima foi feita com echo e read, por exemplo.
